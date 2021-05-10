@@ -5,15 +5,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostsComponent } from './components/posts.component';
 import * as fromPosts from './state';
-import { PostItemComponent } from './components/post-list/post-item.component';
+import { PostItemComponent } from './components/post-list/post-item/post-item.component';
+import { AddPostComponent } from './components/add-post/add-post.component';
+import { PostListComponent } from './components/post-list/post-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         PostsComponent,
-        PostItemComponent
+        PostItemComponent,
+        AddPostComponent,
+        PostListComponent
     ],
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         PostsRoutingModule,
         StoreModule.forFeature(fromPosts.postsFeatureKey, fromPosts.postsReducer),
         EffectsModule.forFeature([fromPosts.PostsEffects])

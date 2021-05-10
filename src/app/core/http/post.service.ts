@@ -16,4 +16,8 @@ export class PostService {
     getAll(): Observable<Array<IPost>> {
         return this._http.get<Array<IPost>>(`${API_BASE_URL}/posts`);
     }
+
+    insert(post: IPost): Observable<IPost> {
+        return this._http.post<IPost>(`${API_BASE_URL}/posts`, post);
+    }
 }

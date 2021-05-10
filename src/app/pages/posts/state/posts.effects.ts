@@ -22,4 +22,15 @@ export class PostsEffects {
             })
         );
     });
+
+    addPost$ = createEffect(() => {
+        return this._actions$.pipe(ofType(postsActions.addPost),
+            switchMap(({ post }) => {
+                return this._postService.insert(post).pipe(
+                    map((post: IPost) => {
+                        return postsActions.addPostSuccess({ post });
+                    })
+                );
+            }));
+    });
 }

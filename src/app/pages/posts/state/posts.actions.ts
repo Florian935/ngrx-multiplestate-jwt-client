@@ -16,3 +16,17 @@ export const loadPostsError = createAction(
     props<{ errorMessage: string }>()
 );
 
+export const addPost = createAction(
+    PostsActions.ADD_POST,
+    props<{ post: IPost }>()
+);
+
+export const addPostSuccess = createAction(
+    PostsActions.ADD_POST_SUCCESS,
+    props<{ post: IPost }>()
+);
+
+export const addPostError = createAction(
+    PostsActions.ADD_POST_ERROR,
+    props<{ errorMessage: string }>()
+);

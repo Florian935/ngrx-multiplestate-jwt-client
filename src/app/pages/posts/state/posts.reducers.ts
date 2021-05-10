@@ -14,5 +14,8 @@ export const postsReducer = createReducer(
     }),
     on(postsActions.loadPostsError, (postsState, { errorMessage }) => {
         return { ...postsState, errorMessage };
+    }),
+    on(postsActions.addPostSuccess, (postsState, { post }) => {
+        return { ...postsState, posts: [ ...postsState.posts, post ] };
     })
 );

@@ -1,4 +1,22 @@
-<h1>All my posts:</h1>
-<ng-container *ngFor="let post of posts$ | async">
-    <app-post-item [post]="post"></app-post-item>
-</ng-container>
+<br />
+<br />
+
+<div>
+    <button
+        routerLinkActive="active"
+        #rlaList="routerLinkActive"
+        [routerLink]="['list']"
+        [disabled]="rlaList.isActive"
+    >
+        All post
+    </button>
+    <button
+        routerLinkActive="active"
+        #rlaAdd="routerLinkActive"
+        [routerLink]="['add-post']"
+        [disabled]="rlaAdd.isActive"
+    >
+    Add post
+    </button>
+</div>
+<router-outlet></router-outlet>
