@@ -10,7 +10,7 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'list' },
             { path: 'list', component: PostListComponent },
-            { path: 'add-post', component: AddPostComponent }
+            { path: 'add', component: AddPostComponent }
         ]
     }
 ];
