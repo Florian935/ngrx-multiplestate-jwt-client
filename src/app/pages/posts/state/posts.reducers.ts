@@ -17,5 +17,12 @@ export const postsReducer = createReducer(
     }),
     on(postsActions.addPostSuccess, (postsState, { post }) => {
         return { ...postsState, posts: [ ...postsState.posts, post ] };
+    }),
+
+    on(postsActions.deletePostSuccess, (postsState, { postId }) => {
+        return { ...postsState, posts: [ ...postsState.posts.filter(post => post.id !== postId) ] };
+    }),
+    on(postsActions.deletePostError, (postsState, { errorMessage }) => {
+        return { ...postsState, errorMessage };
     })
 );

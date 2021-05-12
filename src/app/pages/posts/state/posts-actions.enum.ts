@@ -5,5 +5,9 @@ export enum PostsActions {
 
     ADD_POST = '[Post] Add Post',
     ADD_POST_SUCCESS = '[Post] Add Post Success',
-    ADD_POST_ERROR = '[Post] Add Post Error'
+    ADD_POST_ERROR = '[Post] Add Post Error',
+
+    DELETE_POST = '[Post] Delete Post',
+    DELETE_POST_SUCCESS = '[Post] Delete Post Success',
+    DELETE_POST_ERROR = '[Post] Delete Post Error',
 }

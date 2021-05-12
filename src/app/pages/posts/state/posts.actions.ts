@@ -30,3 +30,18 @@ export const addPostError = createAction(
     PostsActions.ADD_POST_ERROR,
     props<{ errorMessage: string }>()
 );
+
+export const deletePost = createAction(
+    PostsActions.DELETE_POST,
+    props<{ postId: string }>()
+);
+
+export const deletePostSuccess = createAction(
+    PostsActions.DELETE_POST_SUCCESS,
+    props<{ postId: string }>()
+);
+
+export const deletePostError = createAction(
+    PostsActions.DELETE_POST_ERROR,
+    props<{ errorMessage: string }>()
+);

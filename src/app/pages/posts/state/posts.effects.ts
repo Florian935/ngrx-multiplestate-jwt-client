@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { PostService } from '@core/http/post.service';
 import * as postsActions from './posts.actions';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class PostsEffects {
@@ -32,5 +33,23 @@ export class PostsEffects {
                     })
                 );
             }));
+    });
+
+    deletePost$ = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(postsActions.deletePost),
+            switchMap(({ postId }) => {
+                return this._postService.deleteById(postId).pipe(
+                    map(unusedResponse => {
+                        return postsActions.deletePostSuccess({ postId });
+                    }),
+                    catchError(unusedError => {
+                        return of(postsActions.deletePostError({
+                            errorMessage: 'An error occurred while trying to delete this post.'
+                        }));
+                    })
+                );
+            })
+        );
     });
 }

@@ -20,4 +20,8 @@ export class PostService {
     insert(post: IPost): Observable<IPost> {
         return this._http.post<IPost>(`${API_BASE_URL}/posts`, post);
     }
+
+    deleteById(postId: string): Observable<void> {
+        return this._http.delete<void>(`${API_BASE_URL}/posts/${postId}`);
+    }
 }

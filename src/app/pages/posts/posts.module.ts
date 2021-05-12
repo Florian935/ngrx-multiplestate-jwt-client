@@ -9,6 +9,7 @@ import { PostItemComponent } from './components/post-list/post-item/post-item.co
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ],
     imports: [
         CommonModule,
+        SharedModule,
         ReactiveFormsModule,
         PostsRoutingModule,
         StoreModule.forFeature(fromPosts.postsFeatureKey, fromPosts.postsReducer),

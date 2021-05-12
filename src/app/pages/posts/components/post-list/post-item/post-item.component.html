@@ -1,5 +1,6 @@
 <div class="post-container">
-    <div>ID: {{ post?.id }}</div>
-    <div>Title: {{ post?.title }}</div>
-    <div>Body: {{ post?.body }}</div>
+    <div>ID: {{ post.id }}</div>
+    <div>Title: {{ post.title }}</div>
+    <div>Body: {{ post.body }}</div>
+    <app-action-button (actionButtonEvent)="onDeletePost()" [text]="'delete'"></app-action-button>
 </div>
