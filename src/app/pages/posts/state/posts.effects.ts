@@ -4,21 +4,33 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { PostService } from '@core/http/post.service';
 import * as postsActions from './posts.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class PostsEffects {
 
     constructor(
         private _postService: PostService,
-        private _actions$: Actions) { }
+        private _actions$: Actions,
+        private _snackBar: MatSnackBar) { }
 
     loadPosts$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(postsActions.loadPosts),
             switchMap(action => {
                 return this._postService.getAll().pipe(
-                    map((posts: Array<IPost>) => postsActions.loadPostsSuccess({ posts }))
+                    map((posts: Array<IPost>) => {
+                        return postsActions.loadPostsSuccess({ posts });
+                    }),
+                    catchError(unusedError => {
+                        this.openNotification(
+                            'An error occurred while loading posts.',
+                            'Cancel',
+                            3000
+                        );
+                        return EMPTY;
+                    })
                 );
             })
         );
@@ -30,6 +42,14 @@ export class PostsEffects {
                 return this._postService.insert(post).pipe(
                     map((post: IPost) => {
                         return postsActions.addPostSuccess({ post });
+                    }),
+                    catchError(unusedError => {
+                        this.openNotification(
+                            'An error occurred while trying to add this post.',
+                            'Cancel',
+                            3000
+                        );
+                        return EMPTY;
                     })
                 );
             }));
@@ -44,12 +64,23 @@ export class PostsEffects {
                         return postsActions.deletePostSuccess({ postId });
                     }),
                     catchError(unusedError => {
-                        return of(postsActions.deletePostError({
-                            errorMessage: 'An error occurred while trying to delete this post.'
-                        }));
+                        this.openNotification(
+                            'An error occurred while trying to delete this post.',
+                            'Cancel',
+                            3000
+                        );
+                        return EMPTY;
                     })
                 );
             })
         );
     });
+
+    private openNotification(message: string, action: string, duration: number): void {
+        this._snackBar.open(
+            message,
+            action,
+            { duration }
+        );
+    }
 }

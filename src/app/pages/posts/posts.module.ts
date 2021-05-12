@@ -10,13 +10,20 @@ import { AddPostComponent } from './components/add-post/add-post.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
+import { EditPostsComponent } from './components/edit-posts/edit-posts.component';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+const materials = [
+    MatSnackBarModule
+];
 @NgModule({
     declarations: [
         PostsComponent,
         PostItemComponent,
         AddPostComponent,
-        PostListComponent
+        PostListComponent,
+        EditPostsComponent
     ],
     imports: [
         CommonModule,
@@ -24,7 +31,8 @@ import { SharedModule } from '@shared/shared.module';
         ReactiveFormsModule,
         PostsRoutingModule,
         StoreModule.forFeature(fromPosts.postsFeatureKey, fromPosts.postsReducer),
-        EffectsModule.forFeature([fromPosts.PostsEffects])
+        EffectsModule.forFeature([fromPosts.PostsEffects]),
+        materials
     ]
 })
 export class PostsModule {

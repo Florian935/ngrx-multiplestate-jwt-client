@@ -1,13 +1,10 @@
 export {
     loadPosts,
     loadPostsSuccess,
-    loadPostsError,
     addPost,
     addPostSuccess,
-    addPostError,
     deletePost,
     deletePostSuccess,
-    deletePostError
 } from './posts.actions';
 export { postsFeatureKey, postsReducer } from './posts.reducers';
 export { PostsState } from './posts.state';
