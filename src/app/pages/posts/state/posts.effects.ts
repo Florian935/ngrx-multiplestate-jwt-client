@@ -65,6 +65,27 @@ export class PostsEffects {
                     }),
                     catchError(unusedError => {
                         this.openNotification(
+                            'An error occurred while trying to update this post.',
+                            'Cancel',
+                            3000
+                        );
+                        return EMPTY;
+                    })
+                );
+            })
+        );
+    });
+
+    updatePost$ = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(postsActions.updatePost),
+            switchMap(({ post }) => {
+                return this._postService.update(post).pipe(
+                    map( (post: IPost) => {
+                        return postsActions.updatePostSuccess({ post });
+                    }),
+                    catchError(unusedError => {
+                        this.openNotification(
                             'An error occurred while trying to delete this post.',
                             'Cancel',
                             3000

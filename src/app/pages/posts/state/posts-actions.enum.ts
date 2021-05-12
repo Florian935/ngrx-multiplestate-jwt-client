@@ -10,4 +10,8 @@ export enum PostsActions {
     DELETE_POST = '[Post] Delete Post',
     DELETE_POST_SUCCESS = '[Post] Delete Post Success',
     DELETE_POST_ERROR = '[Post] Delete Post Error',
+
+    UPDATE_POST = '[Post] Update Post',
+    UPDATE_POST_SUCCESS = '[Post] Update Post Success',
+    UPDATE_POST_ERROR = '[Post] Update Post Error'
 }

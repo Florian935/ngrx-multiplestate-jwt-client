@@ -2,5 +2,6 @@
     <div>ID: {{ post.id }}</div>
     <div>Title: {{ post.title }}</div>
     <div>Body: {{ post.body }}</div>
-    <app-action-button (actionButtonEvent)="onDeletePost()" [text]="'delete'"></app-action-button>
+    <button [routerLink]="['edit', post.id]">Update</button>
+    <button (click)="onDeletePost()">Delete</button>
 </div>

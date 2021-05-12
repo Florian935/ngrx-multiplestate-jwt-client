@@ -30,3 +30,13 @@ export const deletePostSuccess = createAction(
     PostsActions.DELETE_POST_SUCCESS,
     props<{ postId: string }>()
 );
+
+export const updatePost = createAction(
+    PostsActions.UPDATE_POST,
+    props<{ post: IPost }>()
+);
+
+export const updatePostSuccess = createAction(
+    PostsActions.UPDATE_POST_SUCCESS,
+    props<{ post: IPost }>()
+);

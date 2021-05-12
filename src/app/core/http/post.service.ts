@@ -24,4 +24,8 @@ export class PostService {
     deleteById(postId: string): Observable<void> {
         return this._http.delete<void>(`${API_BASE_URL}/posts/${postId}`);
     }
+
+    update(post: IPost): Observable<IPost> {
+        return this._http.put<IPost>(`${API_BASE_URL}/posts/${post.id}`, post);
+    }
 }

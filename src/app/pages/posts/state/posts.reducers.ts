@@ -13,10 +13,16 @@ export const postsReducer = createReducer(
         return { ...postsState, posts };
     }),
     on(postsActions.addPostSuccess, (postsState, { post }) => {
-        return { ...postsState, posts: [ ...postsState.posts, post ] };
+        return { ...postsState, posts: [...postsState.posts, post] };
     }),
 
     on(postsActions.deletePostSuccess, (postsState, { postId }) => {
-        return { ...postsState, posts: [ ...postsState.posts.filter(post => post.id !== postId) ] };
+        return { ...postsState, posts: [...postsState.posts.filter(post => post.id !== postId)] };
+    }),
+    on(postsActions.updatePostSuccess, (postsState, { post }) => {
+        const posts = postsState.posts.map(value => {
+            return value.id === post.id ? post : value;
+        });
+        return { ...postsState, posts: [...posts] };
     })
 );
