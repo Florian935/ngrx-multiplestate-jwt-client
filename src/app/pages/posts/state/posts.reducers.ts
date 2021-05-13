@@ -1,8 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialPostsState } from './posts.state';
 import * as postsActions from './posts.actions';
+import { PostsState } from './posts.state';
 
 export const postsFeatureKey = 'postsState';
+
+const initialPostsState: PostsState = {
+    posts: []
+};
 
 export const postsReducer = createReducer(
     initialPostsState,

@@ -1,10 +1,10 @@
-import { IPost } from 'src/app/shared';
+import { IPost } from '@shared/index';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { PostService } from '@core/http/post.service';
-import * as postsActions from './posts.actions';
+import { PostService } from '@core/index';
+import * as postsActions from '@posts/state/posts.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { EMPTY, of } from 'rxjs';
+import { EMPTY } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class PostsEffects {
     loadPosts$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(postsActions.loadPosts),
-            switchMap(action => {
+            switchMap(unusedAction => {
                 return this._postService.getAll().pipe(
                     map((posts: Array<IPost>) => {
                         return postsActions.loadPostsSuccess({ posts });

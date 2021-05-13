@@ -23,8 +23,10 @@
     "paths": {
         "@environments/*": ["src/environments/*"],
         "@core/*": ["src/app/core/*"],
+        "@app/*": ["src/app/*"],
         "@shared/*": ["src/app/shared/*"],
-        "@posts/*": ["src/app/pages/posts/*"]
+        "@posts/*": ["src/app/pages/posts/*"],
+        "@login/*": ["src/app/pages/login/*"]
     }
   },
   "angularCompilerOptions": {

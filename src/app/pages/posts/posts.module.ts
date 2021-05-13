@@ -9,7 +9,6 @@ import { PostItemComponent } from './components/post-list/post-item/post-item.co
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '@shared/shared.module';
 import { EditPostsComponent } from './components/edit-posts/edit-posts.component';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -27,7 +26,6 @@ const materials = [
     ],
     imports: [
         CommonModule,
-        SharedModule,
         ReactiveFormsModule,
         PostsRoutingModule,
         StoreModule.forFeature(fromPosts.postsFeatureKey, fromPosts.postsReducer),

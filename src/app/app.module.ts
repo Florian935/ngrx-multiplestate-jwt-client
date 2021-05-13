@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@environments/environment';
-import * as fromApp from './state';
+import * as fromRoot from './state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
     declarations: [
@@ -18,9 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         CommonModule,
         CoreModule,
         AppRoutingModule,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature(fromApp.appFeatureKey, fromApp.appReducer),
-        EffectsModule.forRoot([]),
+        StoreModule.forRoot(fromRoot.rootReducerMap),
+        EffectsModule.forRoot([fromRoot.AppEffects]),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         BrowserAnimationsModule
     ],

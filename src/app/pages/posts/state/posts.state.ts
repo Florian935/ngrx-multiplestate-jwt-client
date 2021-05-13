@@ -1,9 +1,5 @@
-import { IPost } from 'src/app/shared';
+import { IPost } from '@shared/index';
 
 export interface PostsState {
     posts: Array<IPost>;
 }
-
-export const initialPostsState: PostsState = {
-    posts: []
-};

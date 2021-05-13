@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as fromPosts from '@posts/state';
-import { UnsubscribeOnDestroyAdapter } from '@shared/components/unsubscribe-on-destroy-adapter';
+import { UnsubscribeOnDestroyAdapter } from '@shared/index';
 import { IPost } from '@shared/interfaces/post.interface';
 @Component({
     selector: 'app-edit-posts',

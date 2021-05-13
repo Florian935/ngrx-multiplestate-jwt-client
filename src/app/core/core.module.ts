@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { PostService } from './http/post.service';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { JwtInterceptor } from '@core/interceptors/jwt.interceptor';
 
 @NgModule({
     declarations: [],
@@ -11,6 +11,9 @@ import { CommonModule } from '@angular/common';
         BrowserModule,
         HttpClientModule
     ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ]
 })
 export class CoreModule {
 
