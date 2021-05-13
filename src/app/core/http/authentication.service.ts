@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICredential, IJwt, IUser, Nullable } from '@app/shared';
+import { ICredential, IJwt, IUser, Nullable } from '@shared/index';
 import { environment } from '@environments/environment';
 
 const API_BASE_URL = environment.API_BASE_URL;
