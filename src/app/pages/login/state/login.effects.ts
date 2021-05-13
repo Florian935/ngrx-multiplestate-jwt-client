@@ -1,10 +1,11 @@
 import { AuthenticationService } from '@core/index';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map, tap, concatMap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import * as loginActions from '@login/state/login.actions';
-import { IJwt, IUser } from '@app/shared';
+import { IJwt, IUser, Nullable } from '@app/shared';
 import { Router } from '@angular/router';
+import { EMPTY, of } from 'rxjs';
 
 @Injectable()
 export class LoginEffects {
@@ -43,8 +44,26 @@ export class LoginEffects {
     }, { dispatch: false }
     );
 
-    private buildUser(username: string): IUser {
+    tryAutoConnect$ = createEffect(() => {
+        return this._actions$.pipe(
+            ofType(loginActions.tryAutoConnect),
+            tap(console.log),
+            concatMap(unusedAction => {
+                const user: IUser = this.buildUser(this._authenticationService.getUsername());
+                const jwt: IJwt = this.buildJwt(this._authenticationService.getToken());
+                return user.username && jwt.token
+                    ? of(loginActions.authenticateUserSuccess({ user, jwt, redirect: false }))
+                    : EMPTY;
+            })
+        );
+    });
+
+    private buildUser(username: Nullable<string>): IUser {
         return { username };
+    }
+
+    private buildJwt(token: Nullable<string>): IJwt {
+        return { token };
     }
 
     private setPropertiesInLocalStorage(user: IUser, jwt: IJwt): void {
@@ -52,5 +71,3 @@ export class LoginEffects {
         this._authenticationService.setToken(jwt);
     }
 }
-
-
