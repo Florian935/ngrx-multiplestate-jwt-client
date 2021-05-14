@@ -16,8 +16,10 @@ export const loginReducer = createReducer(
         return { ...loginState, user, jwt };
     }),
     on(loginActions.tryAutoConnect, (loginState) => {
-        console.log('toto');
         return { ...loginState };
+    }),
+    on(loginActions.authenticationUserError, (loginState, { errorMessage }) => {
+        return { ...loginState, errorMessage };
     })
 );
 

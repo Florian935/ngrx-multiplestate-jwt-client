@@ -17,3 +17,10 @@ export const selectToken = createSelector(
     selectLoginState,
     _selectToken
 );
+
+const _selectErrorMessage = (loginState: LoginState) => loginState.errorMessage;
+
+export const selectErrorMessage = createSelector(
+    selectLoginState,
+    _selectErrorMessage
+);

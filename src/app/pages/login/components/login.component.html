@@ -1,1 +1,5 @@
-<app-login-form (submitCredential)="onSubmitCredentials($event)"></app-login-form>
+<app-login-form
+    [errorMessage]="errorMessage$ | async"
+    (submitCredential)="onSubmitCredentials($event)"
+>
+</app-login-form>

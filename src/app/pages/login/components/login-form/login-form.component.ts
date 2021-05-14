@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ICredential } from '@app/shared';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ICredential, Nullable } from '@shared/index';
 
 @Component({
     selector: 'app-login-form',
@@ -9,6 +9,7 @@ import { ICredential } from '@app/shared';
 })
 export class LoginFormComponent implements OnInit {
     loginForm!: FormGroup;
+    @Input() errorMessage: Nullable<string>;
     @Output() submitCredential: EventEmitter<ICredential> = new EventEmitter<ICredential>();
 
     constructor(private _formBuilder: FormBuilder) { }

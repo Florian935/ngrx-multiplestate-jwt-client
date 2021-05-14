@@ -1,6 +1,8 @@
+import { Nullable } from '@shared/index';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ICredential } from '@app/shared';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as fromLogin from '@login/state';
 
 @Component({
@@ -9,6 +11,8 @@ import * as fromLogin from '@login/state';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    errorMessage$: Observable<Nullable<string>> = this._store.pipe(select(fromLogin.selectErrorMessage));
+
 
     constructor(private _store: Store<fromLogin.LoginState>) {}
 

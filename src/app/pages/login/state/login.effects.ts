@@ -1,5 +1,5 @@
 import { AuthenticationService } from '@core/index';
-import { switchMap, map, tap, concatMap } from 'rxjs/operators';
+import { switchMap, map, tap, concatMap, catchError } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import * as loginActions from '@login/state/login.actions';
@@ -25,6 +25,10 @@ export class LoginEffects {
                         const user: IUser = this.buildUser(credentials.login);
                         this.setPropertiesInLocalStorage(user, jwt);
                         return loginActions.authenticateUserSuccess({ user, jwt, redirect: true });
+                    }),
+                    catchError(unusedError => {
+                        const errorMessage = 'Bad credentials provided';
+                        return of(loginActions.authenticationUserError({ errorMessage }));
                     })
                 );
             })
@@ -47,16 +51,21 @@ export class LoginEffects {
     tryAutoConnect$ = createEffect(() => {
         return this._actions$.pipe(
             ofType(loginActions.tryAutoConnect),
-            tap(console.log),
             concatMap(unusedAction => {
-                const user: IUser = this.buildUser(this._authenticationService.getUsername());
-                const jwt: IJwt = this.buildJwt(this._authenticationService.getToken());
+                const { user, jwt } = this.buildUserAndJwt();
                 return user.username && jwt.token
                     ? of(loginActions.authenticateUserSuccess({ user, jwt, redirect: false }))
                     : EMPTY;
             })
         );
     });
+
+    private buildUserAndJwt(): { user: IUser, jwt: IJwt } {
+        const user: IUser = this.buildUser(this._authenticationService.getUsername());
+        const jwt: IJwt = this.buildJwt(this._authenticationService.getToken());
+
+        return { user, jwt };
+    }
 
     private buildUser(username: Nullable<string>): IUser {
         return { username };
